@@ -1,0 +1,1 @@
+# empty on purpose (makes "maze" a package)
