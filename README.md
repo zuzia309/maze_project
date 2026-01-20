@@ -34,11 +34,8 @@ maze_project/
 
 ## Wymagania
 
-- Python 3.10+ (zwykle działa też na 3.9+)
+- Python 3.9+
 - `matplotlib` (tylko do rysowania PNG/okna; ASCII działa bez tego)
-
-> Na macOS często nie da się instalować pakietów do systemowego Pythona przez `pip` (PEP 668).  
-> Najprościej: użyj **virtualenv**.
 
 
 ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻
@@ -46,18 +43,23 @@ maze_project/
 ## Uruchomienie
 
 1) ASCII w terminalu (bez matplotlib)
+
 python main.py --rows 15 --cols 30 --algo dfs --ascii --no-show
 
 2) Zapis do PNG (bez okna)
+
 python main.py --rows 30 --cols 30 --algo prim --seed 123 --out maze.png --no-show
 
-3) Rozwiązanie labiryntu i zapis PNG ze ścieżką
+3) Rozwiązanie labiryntu i zapis PNG ze ścieżką 
+
 python main.py --rows 25 --cols 25 --algo dfs --seed 7 --solve --out solved.png --no-show
 
 4) Wyświetlenie w oknie (matplotlib)
+
 python main.py --rows 20 --cols 20 --algo dfs --show
 
 Parametry CLI
+
 	--rows – liczba wierszy siatki (liczba komórek w pionie)
 	--cols – liczba kolumn siatki (liczba komórek w poziomie)
 	--algo – algorytm generowania: dfs lub prim
@@ -99,6 +101,7 @@ BFS zwraca najkrótszą ścieżkę od wejścia do wyjścia.
 ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻ ⸻
 
 Autor
+
 Zuzanna Czerwińska
 
 
