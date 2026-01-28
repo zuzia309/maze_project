@@ -6,8 +6,8 @@ from typing import Dict, List, Optional, Tuple
 
 from .model import Maze, Cell
 
-
 def random_border_cell(rows: int, cols: int) -> Tuple[Cell, str]:
+    """Losuje komórkę na brzegu siatki oraz stronę ściany do otwarcia na zewnątrz."""
     side = random.choice(["top", "bottom", "left", "right"])
     if side == "top":
         return (0, random.randrange(cols)), "top"
@@ -19,6 +19,7 @@ def random_border_cell(rows: int, cols: int) -> Tuple[Cell, str]:
 
 
 def bfs_distances(maze: Maze, start: Cell) -> Dict[Cell, int]:
+    """Liczy odległości BFS od komórki start do wszystkich osiągalnych komórek."""
     dist: Dict[Cell, int] = {start: 0}
     q = deque([start])
     while q:
@@ -31,6 +32,7 @@ def bfs_distances(maze: Maze, start: Cell) -> Dict[Cell, int]:
 
 
 def farthest_border_exit(maze: Maze, entrance: Cell) -> Tuple[Cell, str]:
+    """Wybiera wyjście jako najdalszą (wg BFS) komórkę na brzegu, różną od wejścia."""
     dist = bfs_distances(maze, entrance)
 
     border: List[Tuple[Cell, str]] = []
@@ -67,6 +69,7 @@ def farthest_border_exit(maze: Maze, entrance: Cell) -> Tuple[Cell, str]:
 
 
 def solve_bfs(maze: Maze, start: Cell, goal: Cell) -> Optional[List[Cell]]:
+    """Wyznacza najkrótszą ścieżkę od start do goal używając BFS."""
     q = deque([start])
     prev: Dict[Cell, Optional[Cell]] = {start: None}
 

@@ -12,11 +12,14 @@ from maze.render_mpl import render_matplotlib
 
 
 def build_maze(rows: int, cols: int, algo: str, seed: Optional[int]) -> tuple[Maze, Cell, Cell]:
+    """Buduje kompletny labirynt: ustawia seed (opcjonalnie), losuje wejście na brzegu,
+    generuje przejścia (DFS/Prim), a następnie wybiera wyjście jako najdalszą komórkę brzegową (BFS)."""
     if seed is not None:
         random.seed(seed)
 
     maze = Maze(rows, cols)
 
+    # wejscie
     entrance_cell, entrance_side = random_border_cell(rows, cols)
     maze.open_to_outside(entrance_cell, entrance_side)
 
@@ -27,6 +30,7 @@ def build_maze(rows: int, cols: int, algo: str, seed: Optional[int]) -> tuple[Ma
     else:
         raise ValueError("Unknown algo. Use dfs or prim.")
 
+    #wyjscie
     exit_cell, exit_side = farthest_border_exit(maze, entrance_cell)
     maze.open_to_outside(exit_cell, exit_side)
 
@@ -34,6 +38,7 @@ def build_maze(rows: int, cols: int, algo: str, seed: Optional[int]) -> tuple[Ma
 
 
 def parse_args() -> argparse.Namespace:
+    """Parsuje argumenty z terminala używając argparse."""
     p = argparse.ArgumentParser(description="Maze generator (DFS/Prim) + ASCII + PNG + optional solving.")
     p.add_argument("--rows", type=int, default=20)
     p.add_argument("--cols", type=int, default=20)

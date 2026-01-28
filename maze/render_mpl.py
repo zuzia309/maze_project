@@ -12,18 +12,19 @@ def render_matplotlib(
     out: Optional[str] = None,
     show: bool = True,
 ) -> None:
-    import matplotlib.pyplot as plt  # local import
+    import matplotlib.pyplot as plt  # plt do tworzenia rysunkow
+    """Renderuje labirynt graficznie przy użyciu biblioteki Matplotlib."""
 
     fig, ax = plt.subplots(figsize=(8, 8))
-    ax.set_aspect("equal")
-    ax.axis("off")
+    ax.set_aspect("equal") # jednostka w x = jednostce y
+    ax.axis("off") # ukrywamy osie
 
     for r in range(maze.rows):
         for c in range(maze.cols):
-            x = c * cell_size
-            y = (maze.rows - r - 1) * cell_size
+            x = c * cell_size #x rosnie w prawo od 0
+            y = (maze.rows - r - 1) * cell_size # y jest odwrocone zeby wiersz r = 0 byl u gory
             cell = (r, c)
-            w = maze.walls[cell]
+            w = maze.walls[cell] # slownik scian tej komorki
 
             if w["top"]:
                 ax.plot([x, x + cell_size], [y + cell_size, y + cell_size], color="black")

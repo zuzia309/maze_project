@@ -7,22 +7,22 @@ from .model import Maze, Cell, DIRS, DIR_ORDER
 
 
 def generate_dfs(maze: Maze, start: Cell) -> None:
-    """Randomized DFS / recursive backtracker (iterative stack)."""
+    """Randomized DFS"""
     visited = [[False] * maze.cols for _ in range(maze.rows)]
     stack: List[Cell] = [start]
     visited[start[0]][start[1]] = True
 
     while stack:
         r, c = stack[-1]
-        dirs = list(DIR_ORDER)
-        random.shuffle(dirs)
+        dirs = list(DIR_ORDER) #lista kierunkow
+        random.shuffle(dirs) #mieszamy dla losowosci
 
         moved = False
         for d in dirs:
             dr, dc, _opp = DIRS[d]
             nr, nc = r + dr, c + dc
-            if maze.in_bounds(nr, nc) and not visited[nr][nc]:
-                maze.remove_wall((r, c), d)
+            if maze.in_bounds(nr, nc) and not visited[nr][nc]: # jesli sasiad jest w planszy i nie byl odwiedzony
+                maze.remove_wall((r, c), d) # usuwamy sciane miedzy aktualna komorka a sasiadem (przejscie)
                 visited[nr][nc] = True
                 stack.append((nr, nc))
                 moved = True
@@ -33,7 +33,7 @@ def generate_dfs(maze: Maze, start: Cell) -> None:
 
 
 def generate_prim(maze: Maze, start: Cell) -> None:
-    """Randomized Prim on grid: grows spanning tree by carving random frontier edges."""
+    """Randomized Prim"""
     visited = [[False] * maze.cols for _ in range(maze.rows)]
     visited[start[0]][start[1]] = True
 
